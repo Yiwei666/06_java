@@ -16,7 +16,7 @@ public class V2RayExecutorGUI extends JFrame {
         "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0530_azure5-1.json",
         "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0530_azure6-1.json",
         "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_1124_cc1-1.json"
-    };
+};
 
     private Process currentProcess;
 
@@ -24,8 +24,11 @@ public class V2RayExecutorGUI extends JFrame {
         super("V2Ray Commands Executor");
 
         for (int i = 0; i < COMMANDS.length; i++) {
-            JButton button = new JButton(Integer.toString(i + 1));
+            JButton button = new JButton(String.format("%02d", i + 1));
             int finalI = i;
+
+            button.setPreferredSize(new java.awt.Dimension(200, button.getPreferredSize().height));
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -37,7 +40,7 @@ public class V2RayExecutorGUI extends JFrame {
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(250, 400);
+        pack();
         setLocationRelativeTo(null);
     }
 
@@ -52,7 +55,6 @@ public class V2RayExecutorGUI extends JFrame {
         }
 
         try {
-            // 将命令和参数分解，并传递给 ProcessBuilder
             String[] commandArray = command.split(" ");
             ProcessBuilder processBuilder = new ProcessBuilder(commandArray);
             currentProcess = processBuilder.start();
