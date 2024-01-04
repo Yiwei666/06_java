@@ -11,6 +11,9 @@
 CalculatorGUI.java                       # 显示一个UI界面，点击其中的按钮可以执行按钮关联的命令
 ListProcessesByPort.java                 # 列出运行在指定端口的进程ID
 TerminateProcess.java                    # 结束指定ID的进程
+ListAndTerminateProcess.java             # 列出指定端口的进程ID，并结束该进程
+V2RayExecutorGUI.java                    # 显示一个UI界面，点击其中的按钮，会后台隐式启动新的进程来执行 V2Ray 命令
+
 
 ```
 
