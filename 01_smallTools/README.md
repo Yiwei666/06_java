@@ -7,7 +7,12 @@
 
 # 2. 文件结构
 
+```
+CalculatorGUI.java                       # 显示一个UI界面，点击其中的按钮可以执行按钮关联的命令
+ListProcessesByPort.java                 # 列出运行在指定端口的进程ID
+TerminateProcess.java                    # 结束指定ID的进程
 
+```
 
 
 # 3. 环境配置
