@@ -14,9 +14,13 @@ TerminateProcess.java                        # 结束指定ID的进程
 ListAndTerminateProcess.java                 # 列出指定端口的进程ID，并结束该进程
 V2RayExecutorGUI.java                        # 显示一个UI界面，点击其中的按钮，会后台隐式启动新的进程来执行 V2Ray 命令
 V2RayCommandExecutorWithTermination.java     # 相比于V2RayExecutorGUI.java 程序，添加00按钮，用于捕捉1080端口上运行的进程ID并结束
-
+V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java 程序，将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中
 
 ```
 
 
 # 3. 环境配置
+
+### 1. V2RayExecutorWithOutputGUI.java
+
+上述代码实现了一个简单的图形用户界面（GUI）程序，该程序包含多个按钮，每个按钮与不同的V2Ray命令关联。当用户点击按钮时，程序将启动一个新的子进程来执行相应的V2Ray命令，并将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中。这样，用户可以通过点击按钮来方便地启动和管理不同的V2Ray配置。
