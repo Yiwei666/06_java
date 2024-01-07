@@ -24,3 +24,19 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 ### 1. V2RayExecutorWithOutputGUI.java
 
 上述代码实现了一个简单的图形用户界面（GUI）程序，该程序包含多个按钮，每个按钮与不同的V2Ray命令关联。当用户点击按钮时，程序将启动一个新的子进程来执行相应的V2Ray命令，并将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中。这样，用户可以通过点击按钮来方便地启动和管理不同的V2Ray配置。
+
+
+### 2. 编程语言及其GUI相关框架
+
+| Programming Language | GUI Frameworks                     |
+|:-----------------------:|:------------------------------------:|
+| C#                    | WPF (Windows Presentation Foundation), WinForms |
+| C++                   | MFC (Microsoft Foundation Classes), Qt       |
+| Python                | Tkinter, PyQt, Kivy                   |
+| Java                  | JavaFX, Swing                        |
+| JavaScript (Web)      | Electron                             |
+| Swift                 | SwiftUI (for macOS/iOS apps)         |
+| Kotlin (Android)      | Android SDK                          |
+
+
+
