@@ -53,7 +53,8 @@ public class V2RayCommandExecutorWithTermination extends JFrame {
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
+        // pack();
+        setSize(400, 400);
         setLocationRelativeTo(null);
     }
 
@@ -109,19 +110,30 @@ public class V2RayCommandExecutorWithTermination extends JFrame {
         return -1;
     }
 
+    
     private void terminateProcess(int processId) throws IOException, InterruptedException {
         String os = System.getProperty("os.name").toLowerCase();
         String command;
-
+    
         if (os.contains("win")) {
             command = "taskkill /F /PID " + processId;
         } else {
             command = "kill -9 " + processId;
         }
-
-        Process terminateProcess = Runtime.getRuntime().exec(command);
+    
+        // 使用 ProcessBuilder 替代过时的方法
+        ProcessBuilder processBuilder;
+        if (os.contains("win")) {
+            processBuilder = new ProcessBuilder("cmd", "/c", command);
+        } else {
+            processBuilder = new ProcessBuilder("sh", "-c", command);
+        }
+    
+        Process terminateProcess = processBuilder.start();
         terminateProcess.waitFor();
     }
+    
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
