@@ -18,6 +18,7 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 
 ```
 
+注意：在Windows系统中，文件路径可以使用正斜杠（/）或双反斜杠（\）表示。在你提供的两个命令中，一个使用了正斜杠，另一个使用了双反斜杠。
 
 # 3. 环境配置
 
