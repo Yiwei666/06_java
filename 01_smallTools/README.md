@@ -39,7 +39,7 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 | Kotlin (Android)      | Android SDK                          |
 
 
-### 2. 将子进程的输出和错误流传递给当前进程
+### 3. 将子进程的输出和错误流传递给当前进程
 
 ```java
     private void executeV2RayCommand(String command) {
