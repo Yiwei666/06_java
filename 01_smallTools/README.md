@@ -68,3 +68,58 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
         }).start();
     }
 ```
+
+### 4. V2RayCommandExecutorWithTermination.java
+
+```java
+    private void executeV2RayCommand(String command) {
+        if (currentProcess != null) {
+            currentProcess.destroy();
+            try {
+                currentProcess.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            String[] commandArray = command.split(" ");
+            ProcessBuilder processBuilder = new ProcessBuilder(commandArray);
+            currentProcess = processBuilder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
