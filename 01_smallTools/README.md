@@ -39,4 +39,32 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 | Kotlin (Android)      | Android SDK                          |
 
 
+### 2. 将子进程的输出和错误流传递给当前进程
 
+```java
+    private void executeV2RayCommand(String command) {
+        if (currentProcess != null) {
+            currentProcess.destroy();
+            try {
+                currentProcess.waitFor();
+                System.out.println("Previous process terminated.");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        System.out.println("Executing command: " + command);
+    
+        new Thread(() -> {
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
+                processBuilder.inheritIO(); // 将子进程的输出和错误流传递给当前进程
+                currentProcess = processBuilder.start();
+                int exitCode = currentProcess.waitFor();
+                System.out.println("Process finished with exit code: " + exitCode);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+```
