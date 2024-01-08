@@ -39,37 +39,9 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 | Kotlin (Android)      | Android SDK                          |
 
 
-### 3. 将子进程的输出和错误流传递给当前进程
+### 3. 进程管理
 
-```java
-    private void executeV2RayCommand(String command) {
-        if (currentProcess != null) {
-            currentProcess.destroy();
-            try {
-                currentProcess.waitFor();
-                System.out.println("Previous process terminated.");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    
-        System.out.println("Executing command: " + command);
-    
-        new Thread(() -> {
-            try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
-                processBuilder.inheritIO(); // 将子进程的输出和错误流传递给当前进程
-                currentProcess = processBuilder.start();
-                int exitCode = currentProcess.waitFor();
-                System.out.println("Process finished with exit code: " + exitCode);
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-```
-
-### 4. V2RayCommandExecutorWithTermination.java
+#### 1. V2RayCommandExecutorWithTermination.java
 
 ```java
     private void executeV2RayCommand(String command) {
@@ -91,6 +63,62 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
         }
     }
 ```
+
+- 这段代码是一个用于执行 V2Ray 命令的方法。让我解释一下：
+
+  - private void executeV2RayCommand(String command)：这是一个私有方法，用于执行 V2Ray 命令。它接受一个字符串参数 command，表示要执行的命令。
+
+  - if (currentProcess != null)：这是一个条件语句，检查当前进程是否已经存在。
+
+  - currentProcess.destroy()：如果当前进程存在，就销毁它。这通常是为了停止之前执行的 V2Ray 进程。
+
+  - currentProcess.waitFor()：等待当前进程终止。这是通过捕获 InterruptedException 来处理等待过程中的中断异常。
+
+  - `String[] commandArray = command.split(" ")`：将传入的命令字符串按空格分割，得到一个字符串数组 commandArray。这是为了将命令及其参数拆分成数组，以便传递给 ProcessBuilder。
+
+  - ProcessBuilder processBuilder = new ProcessBuilder(commandArray)：使用拆分后的命令数组创建一个新的进程构建器。
+
+  - `currentProcess = processBuilder.start()`：启动新的进程，执行 V2Ray 命令。新的进程被赋值给 currentProcess，以便后续可以对其进行销毁或其他操作。
+
+  - } catch (IOException e) { e.printStackTrace(); }：捕获可能发生的 IOException 异常，并打印异常信息。这是为了处理启动进程时可能出现的 I/O 错误。
+
+
+
+#### 2. 将子进程的输出和错误流传递给当前进程并打印进程ID
+
+```java
+    private void executeV2RayCommand(String command) {
+        if (currentProcess != null) {
+            System.out.println("当前进程ID: " + currentProcess.pid());
+            currentProcess.destroy();
+            try {
+                currentProcess.waitFor();
+                System.out.println("先前进程已终止。");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        System.out.println("执行命令: " + command);
+    
+        new Thread(() -> {
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
+                processBuilder.inheritIO(); // 将子进程的输出和错误流传递给当前进程
+                currentProcess = processBuilder.start();
+    
+                System.out.println("新进程ID: " + currentProcess.pid());
+    
+                int exitCode = currentProcess.waitFor();
+                System.out.println("进程结束，退出码: " + exitCode);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+```
+
+
 
 
 
