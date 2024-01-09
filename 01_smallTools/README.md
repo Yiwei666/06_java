@@ -15,7 +15,8 @@ ListAndTerminateProcess.java                 # 列出指定端口的进程ID，�
 V2RayExecutorGUI.java                        # 显示一个UI界面，点击其中的按钮，会后台隐式启动新的进程来执行 V2Ray 命令
 V2RayCommandExecutorWithTermination.java     # 相比于V2RayExecutorGUI.java 程序，添加00按钮，用于捕捉1080端口上运行的进程ID并结束
 V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java 程序，将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中
-
+V2RayCommandExecutorWithTerminationTXT.java  # 相比于V2RayCommandExecutorWithTermination.java对于按钮关联命令的硬编码，该程序实现读取同级目录下txt文件中的命令并执行
+v2rayCommands.txt                            # 存储命令的文本
 ```
 
 注意：在Windows系统中，文件路径可以使用正斜杠（/）或双反斜杠（\）表示。在你提供的两个命令中，一个使用了正斜杠，另一个使用了双反斜杠。
@@ -165,7 +166,10 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
     }
 ```
 
-
+- 首先，它会检查是否存在当前正在运行的进程（currentProcess）。如果存在，它会终止当前进程并等待其终止。
+- 接着，它会输出当前进程的ID，并执行传入的V2Ray命令。代码使用一个新的线程来执行这个命令，以确保不会阻塞主线程。
+- 在新线程中，它会拆分传入的命令字符串，创建一个进程构建器（ProcessBuilder），并启动一个新的子进程来执行V2Ray命令。
+- 最后，它输出新进程的ID，并等待子进程的结束，打印子进程的退出码。
 
 
 
