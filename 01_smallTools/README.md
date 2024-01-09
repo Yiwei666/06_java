@@ -126,7 +126,44 @@ V2RayExecutorWithOutputGUI.java              # 相比于V2RayExecutorGUI.java �
 - 如果要确保 V2Ray 及其所有子进程都被终止，你可能需要考虑使用更复杂的方法，例如使用系统命令或其他工具，递归地终止所有相关进程。要记住，在处理进程树时，确保你了解操作的影响，以避免不必要的副作用。
 
 
+### 3.
 
+```java
+    private void executeV2RayCommand(String command) {
+        if (currentProcess != null) {
+            System.out.println("当前进程ID: " + currentProcess.pid());
+            currentProcess.destroy();
+            try {
+                currentProcess.waitFor();
+                System.out.println("先前进程已终止。");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        System.out.println("执行命令: " + command);
+    
+        new Thread(() -> {
+            try {
+                String[] commandArray = command.split(" ");
+                System.out.println("拆分后的命令数组: ");
+                for (String part : commandArray) {
+                    System.out.println(part);
+                }                
+                ProcessBuilder processBuilder = new ProcessBuilder(commandArray);
+                processBuilder.inheritIO(); // 将子进程的输出和错误流传递给当前进程
+                currentProcess = processBuilder.start();
+    
+                System.out.println("新进程ID: " + currentProcess.pid());
+    
+                int exitCode = currentProcess.waitFor();
+                System.out.println("进程结束，退出码: " + exitCode);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+```
 
 
 
