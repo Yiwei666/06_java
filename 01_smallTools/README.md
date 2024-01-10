@@ -19,7 +19,7 @@ V2RayCommandExecutorWithTerminationTXT.java  # 相比于V2RayCommandExecutorWith
 v2rayCommands.txt                            # 存储命令的文本，对于路径，推荐使用正斜杠(/)分隔，因为反斜杠会被java转义，需要使用双反斜杠(\\)来表示实际的单斜杠
 ```
 
-注意：在Windows系统中，文件路径可以使用正斜杠（/）或双反斜杠（\）表示。在你提供的两个命令中，一个使用了正斜杠，另一个使用了双反斜杠。
+- 注意：在Windows系统中，文件路径可以使用正斜杠（/）或双反斜杠（\）表示。在你提供的两个命令中，一个使用了正斜杠，另一个使用了双反斜杠。在java中，双反斜杠(\\)表示每个反斜杠都被另一个反斜杠转义，以确保它们被正确地解释为路径而不是转义字符。这样的转义是为了告诉编译器这些反斜杠是普通的字符，而不是转义字符。
 
 # 3. 环境配置
 
@@ -177,7 +177,25 @@ String[] commandArray = command.split("\\s+", -1);
 
 在这种情况下，你可以使用正则表达式` \\s+ `分割字符串，并且在括号中传入一个正整数，表示最大分割次数。这将防止在末尾产生空字符串。
 
+### 4. V2RayCommandExecutorWithTerminationTXT.java
 
+通过jpackage命令转成exe文件并安装后，需要将`v2rayCommands.txt`文件拷贝到在安装目录下，通常默认为`C:\Program Files\MyV2rayTXT`。
+
+- v2rayCommands.txt
+
+```cmd
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0311_do3-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0311_do3-2.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0303_do1-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0303_do1-2.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0331_aws1-2.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_1111_aws1-3.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0525_azure1-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0526_azure2-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0530_azure5-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ray/v2ray-windows-64-v5.4/config_0530_azure6-1.json
+D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ray/v2ray-windows-64-v5.4/config_1124_cc1-1.json
+```
 
 
 
