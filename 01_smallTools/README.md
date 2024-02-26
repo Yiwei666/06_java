@@ -199,6 +199,8 @@ D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ra
 D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ray/v2ray-windows-64-v5.4/config_1124_cc1-1.json
 ```
 
+上述java代码打包后的安装包位于本地`D:\onedrive\5_vsCodeTest\01_test\MyV2rayTXT`目录下，可以直接用于安装
+
 # 4. 参考资料
 
 - [java程序打包和部署](https://github.com/Yiwei666/06_java/wiki/02_Java%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85%E5%92%8C%E9%83%A8%E7%BD%B2#1-java%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85%E5%92%8C%E9%83%A8%E7%BD%B2)
