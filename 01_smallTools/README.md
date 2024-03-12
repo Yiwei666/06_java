@@ -129,6 +129,7 @@ v2rayCommands.txt                            # 存储命令的文本，对于路
 - 如果要确保 V2Ray 及其所有子进程都被终止，你可能需要考虑使用更复杂的方法，例如使用系统命令或其他工具，递归地终止所有相关进程。要记住，在处理进程树时，确保你了解操作的影响，以避免不必要的副作用。
 
 
+
 ### 3. 命令行分割
 
 ```java
@@ -179,9 +180,13 @@ String[] commandArray = command.split("\\s+", -1);
 
 在这种情况下，你可以使用正则表达式` \\s+ `分割字符串，并且在括号中传入一个正整数，表示最大分割次数。这将防止在末尾产生空字符串。
 
+
+
 ### 4. V2RayCommandExecutorWithTerminationTXT.java
 
 通过jpackage命令转成exe文件并安装后，需要将`v2rayCommands.txt`文件拷贝到在安装目录下，通常默认为`C:\Program Files\MyV2rayTXT`。
+
+上述java代码打包后的安装包位于本地`D:\onedrive\5_vsCodeTest\01_test\MyV2rayTXT`目录下，可以直接用于安装
 
 - v2rayCommands.txt
 
@@ -199,7 +204,7 @@ D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ra
 D:/software/09_v2ray/v2ray-windows-64-v5.4/v2ray.exe run -c  D:/software/09_v2ray/v2ray-windows-64-v5.4/config_1124_cc1-1.json
 ```
 
-上述java代码打包后的安装包位于本地`D:\onedrive\5_vsCodeTest\01_test\MyV2rayTXT`目录下，可以直接用于安装
+
 
 # 4. 参考资料
 
