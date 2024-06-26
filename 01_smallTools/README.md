@@ -27,14 +27,95 @@ v2rayCommands.txt                            # 存储命令的文本，对于路
 
 ### 1. `CalculatorGUI.java`
 
-```java
+1. 最简单的 v2ray 启动版本，不能够切换路线和停止进程。
 
+```java
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+public class CalculatorGUI extends JFrame {
+    private static final String[] COMMANDS = {
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0311_do3-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0311_do3-2.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0303_do1-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0303_do1-2.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0331_aws1-2.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_1111_aws1-3.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0525_azure1-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0526_azure2-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0530_azure5-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_0530_azure6-1.json",
+            "D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\v2ray.exe run -c D:\\software\\09_v2ray\\v2ray-windows-64-v5.4\\config_1124_cc1-1.json"
+    };
+
+    private Process currentProcess;  // Track the current cmd process
+
+    public CalculatorGUI() {
+        super("V2Ray Commands Executor");
+
+        // 创建按钮并设置事件监听器
+        for (int i = 0; i < COMMANDS.length; i++) {
+            JButton button = new JButton(Integer.toString(i + 1));
+            int finalI = i;  // to make it effectively final
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    executeCommandInCmd(COMMANDS[finalI]);
+                }
+            });
+            add(button);
+        }
+
+        // 设置布局管理器
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+        // 设置窗口属性
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(250, 400);
+        setLocationRelativeTo(null);
+    }
+
+    private void executeCommandInCmd(String command) {
+        // 如果有上一个进程，先终止它
+        if (currentProcess != null) {
+            currentProcess.destroy();
+            try {
+                // 等待上一个进程终止
+                currentProcess.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            // 使用ProcessBuilder启动新的cmd进程
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", "start", "cmd.exe", "/K", command);
+            currentProcess = processBuilder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CalculatorGUI().setVisible(true);
+            }
+        });
+    }
+}
 ```
 
 
-### 1. V2RayExecutorWithOutputGUI.java
+### 2. V2RayExecutorWithOutputGUI.java
 
-上述代码实现了一个简单的图形用户界面（GUI）程序，该程序包含多个按钮，每个按钮与不同的V2Ray命令关联。当用户点击按钮时，程序将启动一个新的子进程来执行相应的V2Ray命令，并将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中。这样，用户可以通过点击按钮来方便地启动和管理不同的V2Ray配置。
+1. 上述代码实现了一个简单的图形用户界面（GUI）程序，该程序包含多个按钮，每个按钮与不同的V2Ray命令关联。
+2. 当用户点击按钮时，程序将启动一个新的子进程来执行相应的V2Ray命令，并将V2Ray程序的标准输出和错误输出重定向到名为 "v2ray_output.txt" 和 "v2ray_error.txt" 的文件中。这样，用户可以通过点击按钮来方便地启动和管理不同的V2Ray配置。
+
+
 
 
 ### 2. 编程语言及其GUI相关框架
