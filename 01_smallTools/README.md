@@ -9,6 +9,8 @@ v2ray路线切换GUI界面，具体功能如下：
 
 # 2. 文件结构
 
+### 1. 项目目录
+
 ```
 CalculatorGUI.java                           # 显示一个UI界面，点击其中的按钮可以执行按钮关联的v2ray命令
 ListProcessesByPort.java                     # 列出运行在指定端口的进程ID
@@ -22,7 +24,25 @@ V2RayCommandExecutorWithTerminationTXT.java  # 相比于V2RayCommandExecutorWith
 v2rayCommands.txt                            # 存储命令的文本，对于路径，推荐使用正斜杠(/)分隔，因为反斜杠会被java转义，需要使用双反斜杠(\\)来表示实际的单斜杠
 ```
 
-- 注意：在Windows系统中，文件路径可以使用`正斜杠（/）`或`双反斜杠（\）`表示。在你提供的两个命令中，一个使用了`正斜杠`，另一个使用了`双反斜杠`。在java中，`双反斜杠(\\)`表示每个`反斜杠`都被另一个`反斜杠`转义，以确保它们被正确地解释为`路径`而不是`转义字符`。这样的转义是为了告诉编译器这些反斜杠是普通的字符，而不是转义字符。
+### 2. 注意事项
+
+- `正斜杠（/）`和`双反斜杠（\）`
+
+注意：在Windows系统中，文件路径可以使用`正斜杠（/）`或`双反斜杠（\）`表示。在你提供的两个命令中，一个使用了`正斜杠`，另一个使用了`双反斜杠`。在java中，`双反斜杠(\\)`表示每个`反斜杠`都被另一个`反斜杠`转义，以确保它们被正确地解释为`路径`而不是`转义字符`。这样的转义是为了告诉编译器这些反斜杠是普通的字符，而不是转义字符。
+
+- 编程语言及其GUI相关框架
+
+| Programming Language | GUI Frameworks                     |
+|:-----------------------:|:------------------------------------:|
+| C#                    | WPF (Windows Presentation Foundation), WinForms |
+| C++                   | MFC (Microsoft Foundation Classes), Qt       |
+| Python                | Tkinter, PyQt, Kivy                   |
+| Java                  | JavaFX, Swing                        |
+| JavaScript (Web)      | Electron                             |
+| Swift                 | SwiftUI (for macOS/iOS apps)         |
+| Kotlin (Android)      | Android SDK                          |
+
+
 
 # 3. 环境配置
 
@@ -116,20 +136,6 @@ public class CalculatorGUI extends JFrame {
 1. 上述代码实现了一个简单的图形用户界面（GUI）程序，该程序包含多个按钮，每个按钮与不同的V2Ray命令关联。
 2. 当用户点击按钮时，程序将启动一个新的子进程来执行相应的V2Ray命令，并将V2Ray程序的标准输出和错误输出重定向到名为 `"v2ray_output.txt"` 和 `"v2ray_error.txt"` 的文件中。这样，用户可以通过点击按钮来方便地启动和管理不同的V2Ray配置。
 
-
-
-
-### 2. 编程语言及其GUI相关框架
-
-| Programming Language | GUI Frameworks                     |
-|:-----------------------:|:------------------------------------:|
-| C#                    | WPF (Windows Presentation Foundation), WinForms |
-| C++                   | MFC (Microsoft Foundation Classes), Qt       |
-| Python                | Tkinter, PyQt, Kivy                   |
-| Java                  | JavaFX, Swing                        |
-| JavaScript (Web)      | Electron                             |
-| Swift                 | SwiftUI (for macOS/iOS apps)         |
-| Kotlin (Android)      | Android SDK                          |
 
 
 ### 3. 进程管理
